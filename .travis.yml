@@ -1,4 +1,4 @@
-language: cpp
+language: objective-c
 
 before_install:
   - uname -a
