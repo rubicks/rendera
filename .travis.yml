@@ -2,7 +2,6 @@ language: objective-c
 
 before_install:
   - uname -a
-  - lsb_release --all
 
 install:
   - ${TRAVIS_BUILD_DIR}/install-dependencies.sh
