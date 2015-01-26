@@ -20,7 +20,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([subdir-objects])
 LT_PREREQ([2.4])
-LT_INIT([static disable-shared])
+LT_INIT([])
 
 
 # spit platform info
