@@ -6,6 +6,8 @@
 
 system=`uname -s`
 
+echo "\${system} == \"${system}\""
+
 case $system in
     Linux)
         echo -n && \
