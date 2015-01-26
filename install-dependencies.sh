@@ -62,7 +62,7 @@ case "${_system}" in
             brew install wine       && \
             brew upgrade xctool     && \
             xcode-select --install  && \
-            _install_macports()     && \
+            _install_macports       && \
             echo -n
         ;;
     *)
