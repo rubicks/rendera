@@ -41,16 +41,19 @@ case "${_system}" in
             echo "Linux end"
         ;;
     Darwin)
-        echo -n \
-            && \
-            brew update \
-            && \
-            brew install    \
-                 coreutils  \
-                 fltk       \
-                 fontconfig \
-                 wine       \
-            && \
+        echo -n                  \
+            &&                   \
+            brew update          \
+            &&                   \
+            brew outdated xctool || brew upgrade xctool \
+            &&                   \
+            brew install         \
+                 coreutils       \
+                 fltk            \
+                 fontconfig      \
+                 wine            \
+                 xctool          \
+            &&                   \
             echo -n
         ;;
     *)
