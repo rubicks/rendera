@@ -12,33 +12,33 @@ echo "\${_system} == \"${_system}\""
 
 case "${_system}" in
     Linux)
-        echo -n && \
-            sudo apt-get -y update && \
-            sudo apt-get -y install \
-                 libX11-dev         \
-                 libfltk1.3-dev     \
-                 libfontconfig1-dev \
-                 libglu1-mesa-dev   \
-                 libice-dev         \
-                 libjpeg-dev        \
-                 libjpeg62-dev      \
-                 libpng-dev         \
-                 libpng12-dev       \
-                 libx11-dev         \
-                 libxcursor-dev     \
-                 libxext-dev        \
-                 libxft-dev         \
-                 libxi-dev          \
-                 libxinerama-dev    \
-                 libxrender-dev     \
-                 libz-dev           \
-                 mesa-common-dev    \
-                 mingw32            \
-                 mingw32-binutils   \
-                 mingw32-runtime    \
-                 wine               \
-            && \
-            echo -n
+        echo "Linux begin"                             && \
+            sudo apt-get -y update                     && \
+            sudo apt-get -y install libX11-dev         && \
+            sudo apt-get -y install libfltk1.3-dev     && \
+            sudo apt-get -y install libfontconfig1-dev && \
+            sudo apt-get -y install libglu1-mesa-dev   && \
+            sudo apt-get -y install libice-dev         && \
+            sudo apt-get -y install libjpeg-dev        && \
+            sudo apt-get -y install libjpeg62-dev      && \
+            sudo apt-get -y install libpng-dev         && \
+            sudo apt-get -y install libpng12-dev       && \
+            sudo apt-get -y install libx11-dev         && \
+            sudo apt-get -y install libxcursor-dev     && \
+            sudo apt-get -y install libxext-dev        && \
+            sudo apt-get -y install libxft-dev         && \
+            sudo apt-get -y install libxi-dev          && \
+            sudo apt-get -y install libxinerama-dev    && \
+            sudo apt-get -y install libxrender-dev     && \
+            sudo apt-get -y install libz-dev           && \
+            sudo apt-get -y install mesa-common-dev    && \
+            sudo apt-get -y install mingw32            && \
+            sudo apt-get -y install mingw32-binutils   && \
+            sudo apt-get -y install mingw32-runtime    && \
+            sudo apt-get -y install wine               && \
+            sudo apt-get -y autoremove                 && \
+            sudo apt-get -y autoclean                  && \
+            echo "Linux end"
         ;;
     Darwin)
         echo -n \
