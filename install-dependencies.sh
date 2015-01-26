@@ -5,6 +5,19 @@
 # install packages on which rendera depends
 
 
+function _install_macports()
+{
+    echo -n                                                                    && \
+        curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.3.1.tar.bz2 && \
+        tar xf MacPorts-2.3.1.tar.bz2                                          && \
+        cd MacPorts-2.3.1/                                                     && \
+        ./configure                                                            && \
+        make                                                                   && \
+        sudo make install                                                      && \
+        echo "win _install_macports"
+}
+
+
 _system=`uname -s`
 
 echo "\${TRAVIS_OS_NAME} == \"${TRAVIS_OS_NAME}\""
@@ -41,17 +54,16 @@ case "${_system}" in
             echo "Linux end"
         ;;
     Darwin)
-        echo -n && \
-            wget http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg && \
-            ./dmg-install.sh XQuartz-2.7.7.dmg && \
-            brew update && \
-            brew install coreutils       && \
-            brew install fltk            && \
-            brew install fontconfig      && \
-            brew install wine            && \
-            brew outdated xctool || \
-                brew upgrade xctool && \
-                    echo -n
+        echo -n                     && \
+            brew update             && \
+            brew install coreutils  && \
+            brew install fltk       && \
+            brew install fontconfig && \
+            brew install wine       && \
+            brew upgrade xctool     && \
+            xcode-select --install  && \
+            _install_macports()     && \
+            echo -n
         ;;
     *)
         echo "unsupported system: ${_system}"
