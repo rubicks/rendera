@@ -2,7 +2,13 @@
 #
 # rendera/build-o-matic.sh
 
-[[ "Darwin" == $(uname -s) ]] && alias readlink=greadlink
+if [[ "Darwin" == $(uname -s) ]]
+then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    echo "\${PATH}    == \"${PATH}\""
+    echo "\${MANPATH} == \"${MANPATH}\""
+fi
 
 echo -n                                                             && \
     export PROJECT_DIR=$(dirname $(readlink -f ${BASH_SOURCE}))     && \
