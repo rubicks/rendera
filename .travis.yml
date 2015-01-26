@@ -1,7 +1,13 @@
-language: objective-c
+language: cpp
+
+os:
+  - linux
+  - osx
 
 before_install:
   - uname -a
+  - uname -s
+  - echo "\${TRAVIS_OS_NAME} == \"${TRAVIS_OS_NAME}\""
 
 install:
   - ${TRAVIS_BUILD_DIR}/install-dependencies.sh
