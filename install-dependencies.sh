@@ -56,13 +56,11 @@ case "${_system}" in
     Darwin)
         echo -n                     && \
             brew update             && \
+            brew upgrade xctool     && \
             brew install coreutils  && \
             brew install fltk       && \
             brew install fontconfig && \
             brew install wine       && \
-            brew upgrade xctool     && \
-            xcode-select --install  && \
-            _install_macports       && \
             echo -n
         ;;
     *)
