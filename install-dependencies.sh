@@ -45,10 +45,11 @@ case "${_system}" in
             && \
             brew update \
             && \
-            brew install            \
-                 fltk               \
-                 fontconfig         \
-                 wine               \
+            brew install    \
+                 coreutils  \
+                 fltk       \
+                 fontconfig \
+                 wine       \
             && \
             echo -n
         ;;
