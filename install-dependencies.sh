@@ -41,20 +41,17 @@ case "${_system}" in
             echo "Linux end"
         ;;
     Darwin)
-        echo -n                  \
-            &&                   \
-            brew update          \
-            &&                   \
-            brew outdated xctool || brew upgrade xctool \
-            &&                   \
-            brew install         \
-                 coreutils       \
-                 fltk            \
-                 fontconfig      \
-                 wine            \
-                 xctool          \
-            &&                   \
-            echo -n
+        echo -n && \
+            wget http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg && \
+            ./dmg-install.sh XQuartz-2.7.7.dmg && \
+            brew update && \
+            brew install coreutils       && \
+            brew install fltk            && \
+            brew install fontconfig      && \
+            brew install wine            && \
+            brew outdated xctool || \
+                brew upgrade xctool && \
+                    echo -n
         ;;
     *)
         echo "unsupported system: ${_system}"
