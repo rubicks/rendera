@@ -6,6 +6,12 @@ AC_INIT([Rendera],
         [joe_7@sbcglobal.net],
         [rendera],
         [https://github.com/Mortis69/rendera])
+
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+AC_EXEEXT
+
 AC_LANG_PUSH([C++])
 AC_CONFIG_SRCDIR([Rendera.md])
 AC_CONFIG_HEADERS([config.h])
@@ -15,6 +21,54 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([subdir-objects])
 LT_PREREQ([2.4])
 LT_INIT([static disable-shared])
+
+
+# spit platform info
+
+AC_MSG_NOTICE([build_cpu     == $build_cpu])
+AC_MSG_NOTICE([build_vendor  == $build_vendor])
+AC_MSG_NOTICE([build_os      == $build_os])
+AC_MSG_NOTICE([host_cpu      == $host_cpu])
+AC_MSG_NOTICE([host_vendor   == $host_vendor])
+AC_MSG_NOTICE([host_os       == $host_os])
+AC_MSG_NOTICE([target_cpu    == $target_cpu])
+AC_MSG_NOTICE([target_vendor == $target_vendor])
+AC_MSG_NOTICE([target_os     == $target_os])
+
+AC_DEFINE_UNQUOTED([CANONICAL_BUILD_CPU],
+                   [$build_cpu],
+                   [define build cpu])
+AC_DEFINE_UNQUOTED([CANONICAL_BUILD_VENDOR],
+                   [$build_vendor],
+                   [define build vendor])
+AC_DEFINE_UNQUOTED([CANONICAL_BUILD_OS],
+                   [$build_os],
+                   [define build os])
+
+AC_DEFINE_UNQUOTED([CANONICAL_HOST_CPU],
+                   [$host_cpu],
+                   [define host cpu])
+AC_DEFINE_UNQUOTED([CANONICAL_HOST_VENDOR],
+                   [$host_vendor],
+                   [define host vendor])
+AC_DEFINE_UNQUOTED([CANONICAL_HOST_OS],
+                   [$host_os],
+                   [define host os])
+
+AC_DEFINE_UNQUOTED([CANONICAL_TARGET_CPU],
+                   [$target_cpu],
+                   [define target cpu])
+AC_DEFINE_UNQUOTED([CANONICAL_TARGET_VENDOR],
+                   [$target_vendor],
+                   [define target vendor])
+AC_DEFINE_UNQUOTED([CANONICAL_TARGET_OS],
+                   [$target_os],
+                   [define target os])
+
+AC_MSG_NOTICE([EXEEXT == $EXEEXT])
+AC_SUBST([EXEEXT])
+
+
 
 # Checks for programs.
 AC_PROG_CXX
@@ -26,29 +80,35 @@ AC_PROG_MKDIR_P
 
 # Checks for libraries.
 
-dnl AC_CHECK_LIB([dl],[dlsym],[],
-dnl   [AC_MSG_ERROR([libdl missing])])
-
-AC_CHECK_LIB([fltk],[fl_system],[],
-  [AC_MSG_ERROR([libfltk missing])])
-
-#AC_CHECK_LIB([fltk_images],[fl_numericsort],[],
-#  [AC_MSG_ERROR([libfltk_images missing])])
-
-AC_CHECK_LIB([jpeg],[jpeg_start_output],[],
-  [AC_MSG_ERROR([libjpeg missing])])
-
-AC_CHECK_LIB([png],[png_malloc],[],
-  [AC_MSG_ERROR([libpng missing])])
-
-AC_CHECK_LIB([rt],[clock_gettime],[],
-  [AC_MSG_ERROR([librt missing])])
-
-AC_CHECK_LIB([z],[gzopen],[],
-  [AC_MSG_ERROR([libz missing])])
-
-AC_CHECK_LIB([X11],[XInitThreads],[],
-  [AC_MSG_ERROR([libX11 missing])])
+case $host_os in
+  *darwin*)
+    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+    AC_CHECK_LIB([fltk], [main],[],[AC_MSG_ERROR([libfltk missing])])
+    AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
+    AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
+  # AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
+    AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
+    ;;
+  *linux*)
+    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+    AC_CHECK_LIB([fltk], [main],[],[AC_MSG_ERROR([libfltk missing])])
+    AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
+    AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
+    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
+    AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
+    ;;
+  *mingw*)
+    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+    AC_CHECK_LIB([fltk], [main],[],[AC_MSG_ERROR([libfltk missing])])
+    AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
+    AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
+    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
+    AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
+    ;;
+  *)
+    AC_MSG_ERROR([unsupported host os])
+    ;;
+esac
 
 
 dnl Checks for header files.
