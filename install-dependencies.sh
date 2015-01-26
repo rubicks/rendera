@@ -24,7 +24,6 @@ esac
 echo -n &&
     eval ${_pkgcmd} update && \
     eval ${_pkgcmd} install \
-         libX11-dev         \
          libfltk1.3-dev     \
          libfontconfig1-dev \
          libglu1-mesa-dev   \
