@@ -82,7 +82,7 @@ AC_PROG_MKDIR_P
 
 case $host_os in
   *darwin*)
-    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+  # AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
     AC_CHECK_LIB([fltk], [main],[],[AC_MSG_ERROR([libfltk missing])])
     AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
     AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
