@@ -23,6 +23,9 @@ script:
   - ${TRAVIS_BUILD_DIR}/build-o-matic.sh
 
 matrix:
+  exclude:
+    - os: osx
+      env: TRCC=i586-mingw32msvc-gcc TRCXX=i586-mingw32msvc-g++
   allow_failures:
     - env: TRCC=clang TRCXX=clang++
     - env: TRCC=i586-mingw32msvc-gcc TRCXX=i586-mingw32msvc-g++
