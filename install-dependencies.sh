@@ -59,8 +59,6 @@ case "${_system}" in
             brew upgrade xctool     && \
             brew install coreutils  && \
             brew install fltk       && \
-            brew install fontconfig && \
-            brew install wine       && \
             echo -n
         ;;
     *)
