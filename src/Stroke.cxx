@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
 #include <algorithm>
+#include <cmath>
 
 #include "Bitmap.H"
 #include "Blend.H"
@@ -39,7 +40,7 @@ namespace
     const int dx = x1 - *x2;
     const int dy = y1 - *y2;
 
-    if(std::abs(dy) > ::std::abs(dx))
+    if(std::abs((double)dy) > ::std::abs((double)dx))
     {
       switch(px + py)
       {
@@ -776,4 +777,3 @@ void Stroke::preview(Bitmap *backbuf, int ox, int oy, float zoom)
     yy2 += zoom;
   }
 }
-
