@@ -111,25 +111,25 @@ void Crop::push(View *view)
         if(view->imgx < beginx)
         {
           side = 0;
-          offset = std::abs(view->imgx - beginx);
+          offset = ::std::abs(view->imgx - beginx);
           resize_started = true;
         }
         else if(view->imgx > lastx)
         {
           side = 1;
-          offset = std::abs(view->imgx - lastx);
+          offset = ::std::abs(view->imgx - lastx);
           resize_started = true;
         }
         else if(view->imgy < beginy)
         {
           side = 2;
-          offset = std::abs(view->imgy - beginy);
+          offset = ::std::abs(view->imgy - beginy);
           resize_started = true;
         }
         else if(view->imgy > lasty)
         {
           side = 3;
-          offset = std::abs(view->imgy - lasty);
+          offset = ::std::abs(view->imgy - lasty);
           resize_started = true;
         }
 

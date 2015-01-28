@@ -149,8 +149,8 @@ void Map::line(int x1, int y1, int x2, int y2, int c)
   inx = dx > 0 ? 1 : -1;
   iny = dy > 0 ? 1 : -1;
 
-  dx = std::abs(dx);
-  dy = std::abs(dy);
+  dx = ::std::abs(dx);
+  dy = ::std::abs(dy);
 
   if(dx >= dy)
   {
@@ -198,8 +198,8 @@ void Map::line(int x1, int y1, int x2, int y2, int c)
 
 void Map::oval(int x1, int y1, int x2, int y2, int c)
 {
-  int w = std::abs(x2 - x1);
-  int h = std::abs(y2 - y1);
+  int w = ::std::abs(x2 - x1);
+  int h = ::std::abs(y2 - y1);
   int x, y;
   int ex, ey;
 
@@ -292,8 +292,8 @@ void Map::oval(int x1, int y1, int x2, int y2, int c)
 
 void Map::ovalfill(int x1, int y1, int x2, int y2, int c)
 {
-  int w = std::abs(x2 - x1);
-  int h = std::abs(y2 - y1);
+  int w = ::std::abs(x2 - x1);
+  int h = ::std::abs(y2 - y1);
   int x, y;
   int ex, ey;
 
@@ -512,8 +512,8 @@ void Map::lineAA(int x1, int y1, int x2, int y2, int c)
   inx = dx > 0 ? 1 : -1;
   iny = dy > 0 ? 1 : -1;
 
-  dx = std::abs(dx);
-  dy = std::abs(dy);
+  dx = ::std::abs(dx);
+  dy = ::std::abs(dy);
 
   if(dx >= dy)
   {
@@ -564,8 +564,8 @@ void Map::ovalAA(int x1, int y1, int x2, int y2, int c)
   x2 <<= 2;
   y2 <<= 2;
 
-  int w = std::abs(x2 - x1);
-  int h = std::abs(y2 - y1);
+  int w = ::std::abs(x2 - x1);
+  int h = ::std::abs(y2 - y1);
   int x, y;
   int ex, ey;
 
@@ -665,8 +665,8 @@ void Map::ovalfillAA(int x1, int y1, int x2, int y2, int c)
   x2 <<= 2;
   y2 <<= 2;
 
-  int ww = std::abs(x2 - x1);
-  int hh = std::abs(y2 - y1);
+  int ww = ::std::abs(x2 - x1);
+  int hh = ::std::abs(y2 - y1);
   int x, y;
   int ex, ey;
 

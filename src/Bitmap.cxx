@@ -37,9 +37,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 namespace
 {
-  int _abs( int n ){ return ::std::abs( n ); }
-
-
   const int stack_size = 0x100000;
   std::vector<int> stack_x(stack_size);
   std::vector<int> stack_y(stack_size);
@@ -209,8 +206,8 @@ void Bitmap::line(int x1, int y1, int x2, int y2, int c, int t)
   int inx = dx > 0 ? 1 : -1;
   int iny = dy > 0 ? 1 : -1;
 
-  dx = _abs(dx);
-  dy = _abs(dy);
+  dx = ::std::abs(dx);
+  dy = ::std::abs(dy);
 
   if(dx >= dy)
   {
@@ -314,8 +311,8 @@ void Bitmap::xorLine(int x1, int y1, int x2, int y2)
   int inx = dx > 0 ? 1 : -1;
   int iny = dy > 0 ? 1 : -1;
 
-  dx = _abs(dx);
-  dy = _abs(dy);
+  dx = ::std::abs(dx);
+  dy = ::std::abs(dy);
 
   if(dx >= dy)
   {
@@ -813,8 +810,8 @@ void Bitmap::fastStretch(Bitmap *dest,
   yd2 += yd1;
   yd2--;
 
-  const int dx = _abs(yd2 - yd1);
-  const int dy = _abs(ys2 - ys1) << 1;
+  const int dx = ::std::abs(yd2 - yd1);
+  const int dy = ::std::abs(ys2 - ys1) << 1;
   const int sx = Common::sign(yd2 - yd1);
   const int sy = Common::sign(ys2 - ys1);
   const int dx2 = dx << 1;
@@ -823,8 +820,8 @@ void Bitmap::fastStretch(Bitmap *dest,
 
   for(int d = 0; d <= dx; d++)
   {
-    const int dx_1 = _abs(xd2 - xd1);
-    const int dy_1 = _abs(xs2 - xs1) << 1;
+    const int dx_1 = ::std::abs(xd2 - xd1);
+    const int dy_1 = ::std::abs(xs2 - xs1) << 1;
     const int sx_1 = Common::sign(xd2 - xd1);
     const int sy_1 = Common::sign(xs2 - xs1);
     const int dx2_1 = dx_1 << 1;

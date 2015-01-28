@@ -39,7 +39,7 @@ namespace
     const int dx = x1 - *x2;
     const int dy = y1 - *y2;
 
-    if(std::abs(dy) > std::abs(dx))
+    if(std::abs(dy) > ::std::abs(dx))
     {
       switch(px + py)
       {

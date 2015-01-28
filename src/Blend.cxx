@@ -170,7 +170,7 @@ int Blend::colorize(const int &c1, const int &c2, const int &t)
 
 int Blend::colorizeHighlights(const int &c1, const int &c2, const int &t)
 {
-  const int dist = std::abs(255 - getl(c1));
+  const int dist = ::std::abs(255 - getl(c1));
   int c3 = transNoAlpha(c1, c2, std::min(t + dist * 2, 255));
 
   return keepLum(c3, getl(c1));
@@ -178,7 +178,7 @@ int Blend::colorizeHighlights(const int &c1, const int &c2, const int &t)
 
 int Blend::colorizeMidtones(const int &c1, const int &c2, const int &t)
 {
-  const int dist = std::abs(128 - getl(c1));
+  const int dist = ::std::abs(128 - getl(c1));
   int c3 = transNoAlpha(c1, c2, std::min(t + dist * 2, 255));
 
   return keepLum(c3, getl(c1));
@@ -186,7 +186,7 @@ int Blend::colorizeMidtones(const int &c1, const int &c2, const int &t)
 
 int Blend::colorizeShadows(const int &c1, const int &c2, const int &t)
 {
-  const int dist = std::abs(0 - getl(c1));
+  const int dist = ::std::abs(0 - getl(c1));
   int c3 = transNoAlpha(c1, c2, std::min(t + dist * 2, 255));
 
   return keepLum(c3, getl(c1));
