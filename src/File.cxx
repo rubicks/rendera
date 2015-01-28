@@ -24,12 +24,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 #include <cstring>
 #include <vector>
-#include <png.h>
-#include <jpeglib.h>
 #include <setjmp.h>
+
+// These are not C++ compatible, so they need to be loaded with proper
+// extern scoping.
+extern "C" {
+    #include <png.h>
+    #include <jpeglib.h>
+}
 
 #include <FL/Fl_Image.H>
 #include <FL/Fl_Native_File_Chooser.H>
+#include <FL/Fl_Group.H>
+#include <FL/fl_ask.H>
 
 #include "Bitmap.H"
 #include "Dialog.H"
@@ -193,7 +200,7 @@ namespace
   }
 
   // force init to run when program starts
-  static const int *temp = init(); 
+  static const int *temp = init();
 }
 
 // display file loading dialog
@@ -412,8 +419,8 @@ Bitmap *File::loadBmp(const char *fn, int overscroll)
   if(h >= 0)
     negy = true;
 
-  w = ::std::abs(w);
-  h = ::std::abs(h);
+  w = ::std::abs((double)w);
+  h = ::std::abs((double)h);
 
   Bitmap *temp = new Bitmap(w, h, overscroll);
   std::vector<unsigned char> linebuf(w * mul + pad);
@@ -756,7 +763,7 @@ void File::save(Fl_Widget *, void *)
   }
 
   int ret = 0;
-  
+
   switch(ext)
   {
     case 0:
@@ -1022,11 +1029,11 @@ int File::savePng(const char *fn)
       }
       else
       {
-        linebuf[x + 0] = getr(*p); 
-        linebuf[x + 1] = getg(*p); 
-        linebuf[x + 2] = getb(*p); 
+        linebuf[x + 0] = getr(*p);
+        linebuf[x + 1] = getg(*p);
+        linebuf[x + 2] = getb(*p);
         if(use_alpha)
-          linebuf[x + 3] = geta(*p); 
+          linebuf[x + 3] = geta(*p);
       }
 
       p++;
@@ -1079,9 +1086,9 @@ int File::saveJpeg(const char *fn)
   {
     for(int x = 0; x < w * 3; x += 3)
     {
-      linebuf[x + 0] = getr(*p); 
-      linebuf[x + 1] = getg(*p); 
-      linebuf[x + 2] = getb(*p); 
+      linebuf[x + 0] = getr(*p);
+      linebuf[x + 1] = getg(*p);
+      linebuf[x + 2] = getb(*p);
       p++;
     }
 
@@ -1269,7 +1276,7 @@ void File::savePalette()
     if(fl_choice("Replace File?", "No", "Yes", NULL) == 0)
       return;
   }
-  
+
   if(Project::palette->save(fn) < 0)
   {
     errorMessage();
@@ -1327,4 +1334,3 @@ char *File::themePath(const char *fn)
 
   return theme_path_string;
 }
-

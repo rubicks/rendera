@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
 #include <algorithm>
+#include <cmath>
 
 #include "Bitmap.H"
 #include "Crop.H"
@@ -111,25 +112,29 @@ void Crop::push(View *view)
         if(view->imgx < beginx)
         {
           side = 0;
-          offset = ::std::abs(view->imgx - beginx);
+          double tmp = view->imgx - beginx;
+          offset = ::std::abs(tmp);
           resize_started = true;
         }
         else if(view->imgx > lastx)
         {
           side = 1;
-          offset = ::std::abs(view->imgx - lastx);
+          double tmp = view->imgx - lastx;
+          offset = ::std::abs(tmp);
           resize_started = true;
         }
         else if(view->imgy < beginy)
         {
           side = 2;
-          offset = ::std::abs(view->imgy - beginy);
+          double tmp = view->imgy - beginy;
+          offset = ::std::abs(tmp);
           resize_started = true;
         }
         else if(view->imgy > lasty)
         {
           side = 3;
-          offset = ::std::abs(view->imgy - lasty);
+          double tmp = view->imgy - lasty;
+          offset = ::std::abs(tmp);
           resize_started = true;
         }
 
@@ -292,5 +297,3 @@ void Crop::reset()
   active = false;
   state = 0;
 }
-
-

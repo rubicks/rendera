@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Hold_Browser.H>
 #include <FL/Fl_Progress.H>
-#include <FL/Fl_Menu_Bar.H>
+#include <FL/Fl_Sys_Menu_Bar.H>
 #include <FL/Fl_Tooltip.H>
 
 #include "Bitmap.H"
@@ -61,7 +61,7 @@ namespace Gui
   Fl_Double_Window *window;
 
   // main menu
-  Fl_Menu_Bar *menubar;
+  Fl_Sys_Menu_Bar *menubar;
 
   // containers
   Fl_Group *group_left;
@@ -180,8 +180,14 @@ void Gui::init()
   window->callback(closeCallback);
 
   // menu
-  menubar = new Fl_Menu_Bar(0, 0, window->w(), 24);
+  #ifdef __APPLE__
+  // On OS X, supplying a height and alike will cause a menu box in the
+  // Window, although none is needed.
+  menubar = new Fl_Sys_Menu_Bar(0,0,0,0);
+  #else
+  menubar = new Fl_Sys_Menu_Bar(0, 0, window->w(), 24);
   menubar->box(FL_THIN_UP_BOX);
+  #endif
 
   menubar->add("&File/New...", 0,
     (Fl_Callback *)Dialog::newImage, 0, 0);
@@ -1125,5 +1131,3 @@ void Gui::updateStatus(char *s)
   coords->copy_label(s);
   coords->redraw();
 }
-
-
