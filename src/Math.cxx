@@ -1,3 +1,5 @@
+/* rendera/src/Math.cxx */
+
 /*
 Copyright (c) 2015 Joe Davisson.
 
@@ -18,80 +20,25 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#include <cmath>
+namespace
+{
+#include <math.h>
+
+  double _cos   ( double a ){ return cos  ( a ); }
+  double _exp   ( double a ){ return exp  ( a ); }
+  double _sin   ( double a ){ return sin  ( a ); }
+  double _sqrt  ( double a ){ return sqrt ( a ); }
+
+  double _atan2 ( double y, double x ){ return atan2 ( y, x ); }
+  double _pow   ( double b, double e ){ return pow   ( b, e ); }
+}
 
 #include "Math.H"
 
-// fft routines adapted from those found here:
-// http://www.dspguide.com/ch12/3.htm
-void Math::forwardFFT(float *real, float *imag, int size)
-{
-  int j = size / 2;
+double Math::cos   ( double a ){ return _cos  ( a ); }
+double Math::exp   ( double a ){ return _exp  ( a ); }
+double Math::sin   ( double a ){ return _sin  ( a ); }
+double Math::sqrt  ( double a ){ return _sqrt ( a ); }
 
-  for(int i = 1; i <= size - 2; i++)
-  {
-    if(i < j)
-    {
-      const float tr = real[j];
-      const float ti = imag[j];
-      real[j] = real[i];
-      imag[j] = imag[i];
-      real[i] = tr;
-      imag[i] = ti;
-    }
-
-    int k = size / 2;
-
-    while(k <= j)
-    {
-      j -= k;
-      k /= 2;
-    }
-
-    j += k;
-  }
-
-  for(int k = 1; k <= (int)(logf(size) / logf(2)); k++)
-  {
-    const int le = (int)(powf(2, k));
-    const int le2 = le / 2;
-
-    float ur = 1;
-    float ui = 0;
-    float sr = cosf(M_PI / le2);
-    float si = -sinf(M_PI / le2);
-
-    for(int j = 1; j <= le2; j++)
-    {
-      for(int i = j - 1; i < size; i += le)
-      {
-        const int ip = i + le2;
-        const float tr = real[ip] * ur - imag[ip] * ui;
-        const float ti = real[ip] * ui + imag[ip] * ur;
-        real[ip] = real[i] - tr;
-        imag[ip] = imag[i] - ti;
-        real[i] += tr;
-        imag[i] += ti;
-      }
-
-      const float tr = ur;
-      ur = tr * sr - ui * si;
-      ui = tr * si + ui * sr;
-    }
-  }
-}
-
-void Math::inverseFFT(float *real, float *imag, int size)
-{
-  for(int k = 0; k < size; k++)
-    imag[k] = -imag[k];
-
-  forwardFFT(real, imag, size);
-
-  for(int i = 0; i < size; i++)
-  {
-    real[i] = real[i] / size;
-    imag[i] = -imag[i] / size;
-  }
-}
-
+double Math::atan2 ( double y, double x ){ return _atan2 ( y, x ); }
+double Math::pow   ( double b, double e ){ return _pow   ( b, e ); }

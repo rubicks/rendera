@@ -1,11 +1,11 @@
 /* rendera/Algo.cxx */
 
 #include <algorithm>
-#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
 #include "Algo.H"
+#include "Math.H"
 
 
 namespace
@@ -100,7 +100,7 @@ namespace
     }
 
     double err = 0.0 ;
-    double derr = std::fabs( double(dy) / double(dx) );
+    double derr = ::Math::abs( double(dy) / double(dx) );
 
     if( 1.0 < derr ){
       /* iterate over y, shim x */

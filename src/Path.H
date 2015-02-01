@@ -18,43 +18,19 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#ifndef MATH_H
-#define MATH_H
+#ifndef PATH_H
+#define PATH_H
 
-namespace Math
+#include <string>
+
+namespace Path
 {
-  // sign, used by fastStretch in Bitmap.cxx
-  template <typename T>
-  inline T sign(T const &v)
-  {
-    return ( T(0) > v ) ? T(-1) : T(1) ;
-  }
-
-  // absolute value
-  template <typename T>
-  inline T abs(T const n)
-  {
-    return (0 > n) ? -n : n;
-  }
-
-  // fast pseudo-random number
-  inline int rnd(void)
-  {
-    static int seed = 12345 ;
-    seed ^= seed << 17 ;
-    seed ^= seed >> 13 ;
-    seed ^= seed <<  5 ;
-    return seed ;
-  }
-
-
-  double cos   ( double );
-  double exp   ( double );
-  double sin   ( double );
-  double sqrt  ( double );
-
-  double atan2 ( double, double );
-  double pow   ( double, double );
+  std::string parent(std::string const &);
+  std::string executable(void);
+  std::string bindir(void);
+  std::string executable(void);
+  std::string parent(std::string const &);
+  std::string usrdir(void);
 }
 
 #endif

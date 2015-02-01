@@ -18,7 +18,6 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#include <cmath>
 #include <vector>
 
 #include <FL/Fl_Box.H>
@@ -599,9 +598,9 @@ namespace AutoCorrect
     bb /= count;
 
     // adjustment factors
-    const double ra = (256.0f / (256 - rr)) / std::sqrt(256.0f / (rr + 1));
-    const double ga = (256.0f / (256 - gg)) / std::sqrt(256.0f / (gg + 1));
-    const double ba = (256.0f / (256 - bb)) / std::sqrt(256.0f / (bb + 1));
+    const float ra = (256.0f / (256 - rr)) / Math::sqrt(256.0f / (rr + 1));
+    const float ga = (256.0f / (256 - gg)) / Math::sqrt(256.0f / (gg + 1));
+    const float ba = (256.0f / (256 - bb)) / Math::sqrt(256.0f / (bb + 1));
 
     // begin restore
     Gui::showProgress(bmp->h);
@@ -618,9 +617,9 @@ namespace AutoCorrect
         const int l = getl(*p);
 
         // apply adjustments
-        r = 255 * pow((double)r / 255, ra);
-        g = 255 * pow((double)g / 255, ga);
-        b = 255 * pow((double)b / 255, ba);
+        r = 255 * Math::pow((float)r / 255, ra);
+        g = 255 * Math::pow((float)g / 255, ga);
+        b = 255 * Math::pow((float)b / 255, ba);
 
         r = clamp(r, 255);
         g = clamp(g, 255);
@@ -1930,7 +1929,7 @@ namespace GaussianBlur
 
     for(int x = 0; x < radius; x++)
     {
-      kernel[x] = 255 * std::exp(-((double)((x - b) * (x - b)) /
+      kernel[x] = 255 * Math::exp(-((double)((x - b) * (x - b)) /
                                            ((b * b) / 2)));
       div += kernel[x];
     }

@@ -70,11 +70,11 @@ AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
 
 # Checks for header files.
 
-AC_CHECK_HEADER([cstdlib],[],[AC_MSG_ERROR([cstdlib missing])])
-AC_CHECK_HEADER([stdint.h],[],[AC_MSG_ERROR([stdint.h missing])])
-AC_CHECK_HEADER([unistd.h],[],[AC_MSG_ERROR([unistd.h missing])])
-AC_CHECK_HEADER([limits.h],[],[AC_MSG_ERROR([limits.h missing])])
-AC_CHECK_HEADER([getopt.h],[],[AC_MSG_ERROR([getopt.h missing])])
+AC_CHECK_HEADER([cmath],    [],[AC_MSG_ERROR([cmath missing])])
+AC_CHECK_HEADER([cstdlib],  [],[AC_MSG_ERROR([cstdlib missing])])
+AC_CHECK_HEADER([limits.h], [],[AC_MSG_ERROR([limits.h missing])])
+AC_CHECK_HEADER([stdint.h], [],[AC_MSG_ERROR([stdint.h missing])])
+AC_CHECK_HEADER([unistd.h], [],[AC_MSG_ERROR([unistd.h missing])])
 
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -94,20 +94,20 @@ AC_TYPE_INT64_T
 
 # Checks for library functions.
 
-AC_CHECK_FUNCS([pow sqrt strcasecmp readlink])
+AC_CHECK_FUNCS([sin cos exp pow sqrt strcasecmp readlink])
 
 
 # Checks for symbol declarations
 
-AC_CHECK_DECLS([M_PI],
-  [],
-  [AC_MSG_ERROR([M_PI missing])],
-  [[#include <math.h>]])
-
-AC_CHECK_DECLS([PATH_MAX],
-  [],
-  [AC_MSG_ERROR([PATH_MAX missing])],
-  [[#include <limits.h>]])
+AC_CHECK_DECLS([pow],[],
+               [AC_MSG_ERROR([pow missing])],
+               [[#include <cmath>]])
+AC_CHECK_DECLS([M_PI],[],
+               [AC_MSG_ERROR([M_PI missing])],
+               [[#include <math.h>]])
+AC_CHECK_DECLS([PATH_MAX],[],
+               [AC_MSG_ERROR([PATH_MAX missing])],
+               [[#include <limits.h>]])
 
 
 # platform-specific things

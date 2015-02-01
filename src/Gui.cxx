@@ -18,8 +18,7 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#include <cmath>
-
+#include <FL/fl_ask.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Choice.H>
@@ -45,6 +44,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 #include "InputInt.H"
 #include "InputText.H"
 #include "Map.H"
+#include "Math.H"
 #include "Palette.H"
 #include "Project.H"
 #include "Separator.H"
@@ -683,8 +683,8 @@ void Gui::updateColor(int c)
   Blend::rgbToHsv(r, g, b, &h, &s, &v);
 
   float angle = ((3.14159 * 2) / 1536) * h;
-  int mx = 48 + 41 * std::cos(angle);
-  int my = 48 + 41 * std::sin(angle);
+  int mx = 48 + 41 * Math::cos(angle);
+  int my = 48 + 41 * Math::sin(angle);
   hue->var = mx + 96 * my;
   satval->var = (int)(s / 5.42) + 48 * (int)(v / 5.42);
 
@@ -904,7 +904,7 @@ void Gui::checkColor(Widget *, void *)
   int mx = pos % 96;
   int my = pos / 96;
 
-  float mouse_angle = atan2f(my - 48, mx - 48);
+  float mouse_angle = Math::atan2(my - 48, mx - 48);
   int h = ((int)(mouse_angle * 244.46) + 1536) % 1536;
   int s = (satval->var % 48) * 5.43;
   int v = (satval->var / 48) * 5.43;
@@ -923,18 +923,18 @@ void Gui::checkColor(Widget *, void *)
   for(int i = 1; i < 1536; i++)
   {
     float angle = ((3.14159 * 2) / 1536) * i;
-    int x1 = 48 + 44 * std::cos(angle);
-    int y1 = 48 + 44 * std::sin(angle);
-    int x2 = 48 + 38 * std::cos(angle);
-    int y2 = 48 + 38 * std::sin(angle);
+    int x1 = 48 + 44 * Math::cos(angle);
+    int y1 = 48 + 44 * Math::sin(angle);
+    int x2 = 48 + 38 * Math::cos(angle);
+    int y2 = 48 + 38 * Math::sin(angle);
 
     Blend::hsvToRgb(i, 255, 255, &r, &g, &b);
     hue->bitmap->line(x1, y1, x2, y2, makeRgb(r, g, b), 0);
     hue->bitmap->line(x1 + 1, y1, x2 + 1, y2, makeRgb(r, g, b), 0);
   }
 
-  const int x1 = 48 + 41 * std::cos(mouse_angle);
-  const int y1 = 48 + 41 * std::sin(mouse_angle);
+  const int x1 = 48 + 41 * Math::cos(mouse_angle);
+  const int y1 = 48 + 41 * Math::sin(mouse_angle);
 
   hue->bitmap->xorRect(x1 - 4, y1 - 4, x1 + 4, y1 + 4);
 

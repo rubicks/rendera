@@ -6,7 +6,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 # AM_CXXFLAGS = -Wall -Wno-unused -fmax-errors=5
 AM_CPPFLAGS = -I $(srcdir)/src -isystem $(FLTK_CONFIG_INCLUDEDIR)
-AM_CXXFLAGS = -Wall -Wextra -Werror -pedantic-errors # -rdynamic
+AM_CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -pedantic-errors # -rdynamic
 
 
 noinst_LTLIBRARIES = libren.la
@@ -61,6 +61,7 @@ libren_la_SOURCES =       \
   src/Map.cxx             \
   src/Math.cxx            \
   src/Math.H              \
+  src/Math.cxx            \
   src/Octree.H            \
   src/Octree.cxx          \
   src/Offset.H            \

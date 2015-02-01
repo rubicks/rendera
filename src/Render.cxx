@@ -18,7 +18,6 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#include <cmath>
 #include <vector>
 
 #include "Bitmap.H"
@@ -71,7 +70,7 @@ namespace
                    const int &x2, const int &y2,
                    const int &edge, const int &trans)
   {
-    float d = std::sqrt(fdist(x1, y1, x2, y2));
+    float d = Math::sqrt(fdist(x1, y1, x2, y2));
     float s = (255 - trans) / (((3 << edge) >> 1) + 1);
 
     if(s < 1)
@@ -351,7 +350,7 @@ namespace
 
     for(int x = 0; x < amount; x++)
     {
-      kernel[x] = 255 * std::exp(-((double)((x - b) * (x - b)) /
+      kernel[x] = 255 * Math::exp(-((double)((x - b) * (x - b)) /
                                            ((b * b) / 2)));
       div += kernel[x];
     }

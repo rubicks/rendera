@@ -19,7 +19,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
 #include <algorithm>
-#include <cmath>
 
 #include "Bitmap.H"
 #include "CheckBox.H"
@@ -31,6 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 #include "InputFloat.H"
 #include "InputInt.H"
 #include "Map.H"
+#include "Math.H"
 #include "Project.H"
 #include "Separator.H"
 #include "Transform.H"
@@ -431,8 +431,8 @@ namespace Rotate
     angle += 90;
 
     // rotation
-    int du_col = (int)((std::sin(angle * (3.14159f / 180)) * scale) * 65536);
-    int dv_col = (int)((std::sin((angle + 90) * (3.14159f / 180)) * scale) * 65536);
+    int du_col = (int)((Math::sin(angle * (3.14159f / 180)) * scale) * 65536);
+    int dv_col = (int)((Math::sin((angle + 90) * (3.14159f / 180)) * scale) * 65536);
     int du_row = -dv_col;
     int dv_row = du_col;
 
@@ -492,8 +492,8 @@ namespace Rotate
     bh /= 2;
 
     // rotation
-    du_col = (int)((std::sin(angle * (3.14159f / 180)) / scale) * 65536);
-    dv_col = (int)((std::sin((angle + 90) * (3.14159f / 180)) / scale) * 65536);
+    du_col = (int)((Math::sin(angle * (3.14159f / 180)) / scale) * 65536);
+    dv_col = (int)((Math::sin((angle + 90) * (3.14159f / 180)) / scale) * 65536);
     du_row = -dv_col;
     dv_row = du_col;
 

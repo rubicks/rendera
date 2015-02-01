@@ -18,52 +18,50 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#ifndef GAMMA_H
-#define GAMMA_H
+#if HAVE_CONFIG_H
+#  include "config.h"
+#else
+#  error "missing config.h"
+#endif
 
-#include "Math.H"
+#include <climits>
+#include <string>
+#include <unistd.h>
+
+#include "Path.H"
 
 namespace
 {
-  // create gamma-correction tables
-  int *init_table_fix(void)
+  std::string _readlink(std::string const &path)
   {
-    int *ret = new int[256];
-
-    for(int i = 0; i < 256; i++)
-      ret[i] = Math::pow((double)i / 255, 2.2) * 65535;
-
-    return ret;
+    char buf[PATH_MAX] = { 0 };
+    ssize_t count = readlink(path.c_str(), buf, PATH_MAX);
+    return std::string(buf, std::max(count, ssize_t(0)));
   }
 
-  int *init_table_unfix(void)
+  std::string _executable( void )
   {
-    int *ret = new int[65536];
-
-    for(int i = 0; i < 65536; i++)
-      ret[i] = Math::pow((double)i / 65535, (1.0 / 2.2)) * 255;
-
-    return ret;
+    return _readlink("/proc/self/exe");
   }
-
-  static const int *table_fix = init_table_fix();
-  static const int *table_unfix = init_table_unfix();
 }
 
-namespace Gamma
+std::string Path::parent(std::string const &path)
 {
-  // convert to gamma-corrected colorspace
-  inline int fix(const int &val)
-  {
-    return table_fix[val];
-  }
-
-  // return to linear colorspace
-  inline int unfix(const int &val)
-  {
-    return table_unfix[val];
-  }
+  return path.substr(0, path.find_last_of("/\\"));
 }
 
-#endif
+std::string Path::executable(void)
+{
+  return _executable();
+}
+
+std::string Path::bindir(void)
+{
+  return Path::parent(Path::executable());
+}
+
+std::string Path::usrdir(void)
+{
+  return Path::parent(Path::bindir());
+}
 
