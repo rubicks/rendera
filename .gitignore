@@ -1,3 +1,5 @@
+# rendera/.gitignore
+
 # Compiled Object files
 *.slo
 *.lo
@@ -26,7 +28,7 @@
 # build dir (by convention)
 /_build/
 
-# autotoolery
+# autotoolery cruft
 /.deps/
 /INSTALL
 #/Makefile
@@ -55,3 +57,6 @@ Makefile.in
 
 # emacs temp files
 *~
+
+# vagrant cruft
+/.vagrant/
