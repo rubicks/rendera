@@ -33,6 +33,7 @@ case "${_system}" in
                  autoconf            \
                  automake            \
                  autoconf-archive    \
+                 g++                 \
                  git                 \
                  libX11-dev          \
                  libfltk1.3-dev      \
