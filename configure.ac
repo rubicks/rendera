@@ -49,7 +49,7 @@ AC_DEFINE_UNQUOTED([TARGET_OS],     [$target_os],     [define target os])
 # spit executable extension
 
 AC_MSG_NOTICE([EXEEXT == $EXEEXT])
-AC_SUBST([EXEEXT])
+dnl AC_SUBST([EXEEXT])
 
 
 # Checks for programs.
@@ -57,15 +57,23 @@ AC_SUBST([EXEEXT])
 AC_PROG_CXX
 AC_PROG_LN_S
 AC_PROG_MKDIR_P
-AC_CHECK_PROG([HAVE_FLTK_CONFIG],[fltk-config$EXEEXT],[yes],[no])
+#AC_CHECK_PROG([HAVE_FLTK_CONFIG],[fltk-config$EXEEXT],[yes],[no])
+AC_ARG_VAR([FLTK_CONFIG],[script to get information about the installed version of fltk])
+AC_PATH_PROG([FLTK_CONFIG],[fltk-config])
+# AX_CXX_COMPILE_STDCXX_11
+# AC_PROG_CC
+
 
 
 # Checks for libraries.
 
 AC_CHECK_LIB([fltk], [main],[],[AC_MSG_ERROR([libfltk missing])])
-AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
-AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
-AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
+dnl AC_CHECK_LIB([jpeg], [main],[],[AC_MSG_ERROR([libjpeg missing])])
+dnl AC_CHECK_LIB([png],  [main],[],[AC_MSG_ERROR([libpng missing])])
+dnl AC_CHECK_LIB([z],    [main],[],[AC_MSG_ERROR([libz missing])])
+dnl AC_CHECK_LIB([fltk_jpeg], [main],[],[AC_MSG_ERROR([libfltk_jpeg missing])])
+dnl AC_CHECK_LIB([fltk_png],  [main],[],[AC_MSG_ERROR([libfltk_png missing])])
+dnl AC_CHECK_LIB([fltk_z],    [main],[],[AC_MSG_ERROR([libfltk_z missing])])
 
 
 # Checks for header files.
@@ -112,27 +120,42 @@ AC_CHECK_DECLS([PATH_MAX],
 
 # platform-specific things
 
-case $host_os in
-  *darwin*)
-    AC_MSG_NOTICE([doing darwin stuff])
-    FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
-# this is for compiling FLTK, not needed here
-#    FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
-    FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
-    ;;
-  *linux*)
-    AC_MSG_NOTICE([doing linux stuff])
-    FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
-# this is for compiling FLTK, not needed here
-#    FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
-    FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
-    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
-    ;;
-  *)
-    AC_MSG_ERROR([unsupported host os: $host_os])
-    ;;
-esac
+dnl case $host_os in
+dnl   *darwin*)
+dnl     AC_MSG_NOTICE([doing darwin stuff])
+dnl     FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
+dnl     FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
+dnl     FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
+dnl     ;;
+dnl   *linux*)
+dnl     AC_MSG_NOTICE([doing linux stuff])
+dnl     FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
+dnl     FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
+dnl     FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
+dnl     AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+dnl #    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
+dnl     ;;
+dnl  *mingw*)
+dnl    AC_MSG_NOTICE([doing mingw stuff])
+dnl    FLTK_CONFIG_INCLUDEDIR=$($FLTK_CONFIG --includedir)
+dnl    FLTK_CONFIG_CXXFLAGS=$(fltk-config.exe --cxxflags)
+dnl    FLTK_CONFIG_LDFLAGS=$(fltk-config.exe --ldflags)
+dnl    FLTK_CONFIG_LDFLAGS+=" -lgdi32 -lcomdlg32"
+dnl    #AC_MSG_NOTICE([doing platform-specific stuff for mingw])
+dnl    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
+dnl    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
+dnl    ;;
+dnl   *)
+dnl     AC_MSG_ERROR([unsupported host os: $host_os])
+dnl     ;;
+dnl esac
 
+
+# snif fltk-config stuff
+
+FLTK_CONFIG_INCLUDEDIR=$(${FLTK_CONFIG} --use-images --includedir)
+FLTK_CONFIG_CXXFLAGS=$(${FLTK_CONFIG} --use-images --cxxflags)
+FLTK_CONFIG_LDFLAGS=$(${FLTK_CONFIG} --use-images --ldflags)
 
 # spit fltk-config stuff
 
