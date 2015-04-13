@@ -18,31 +18,19 @@ along with Rendera; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 */
 
-#include <algorithm>
-#include <cstdlib>
-#include <cstring>
-#include <algorithm>
-#include <vector>
-
-#ifdef __WIN32
-#define HAVE_BOOLEAN
-#include "../fltk-1.3.3/png/png.h"
-// prevent jmorecfg.h from defining INT32
-#ifndef XMD_H
-#define XMD_H
-#endif
-#include "../fltk-1.3.3/jpeg/jpeglib.h"
-#else
-#include <png.h>
-#include <jpeglib.h>
-#endif
-
-// this must be included after pnglib
-#include <setjmp.h>
-
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Image.H>
 #include <FL/Fl_Native_File_Chooser.H>
+
+#include <png.h>
+#include <jpeglib.h>
+
+#include <algorithm>
+#include <algorithm>
+#include <csetjmp>
+#include <cstdlib>
+#include <cstring>
+#include <vector>
 
 #include "Bitmap.H"
 #include "Dialog.H"

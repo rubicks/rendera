@@ -120,42 +120,29 @@ AC_CHECK_DECLS([PATH_MAX],
 
 # platform-specific things
 
-dnl case $host_os in
-dnl   *darwin*)
-dnl     AC_MSG_NOTICE([doing darwin stuff])
-dnl     FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
-dnl     FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
-dnl     FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
-dnl     ;;
-dnl   *linux*)
-dnl     AC_MSG_NOTICE([doing linux stuff])
-dnl     FLTK_CONFIG_INCLUDEDIR=$(fltk-config --includedir)
-dnl     FLTK_CONFIG_CXXFLAGS=$(fltk-config --cxxflags)
-dnl     FLTK_CONFIG_LDFLAGS=$(fltk-config --ldflags)
-dnl     AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
-dnl #    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
-dnl     ;;
-dnl  *mingw*)
-dnl    AC_MSG_NOTICE([doing mingw stuff])
-dnl    FLTK_CONFIG_INCLUDEDIR=$($FLTK_CONFIG --includedir)
-dnl    FLTK_CONFIG_CXXFLAGS=$(fltk-config.exe --cxxflags)
-dnl    FLTK_CONFIG_LDFLAGS=$(fltk-config.exe --ldflags)
-dnl    FLTK_CONFIG_LDFLAGS+=" -lgdi32 -lcomdlg32"
-dnl    #AC_MSG_NOTICE([doing platform-specific stuff for mingw])
-dnl    AC_CHECK_LIB([X11],  [main],[],[AC_MSG_ERROR([libX11 missing])])
-dnl    AC_CHECK_LIB([rt],   [main],[],[AC_MSG_ERROR([librt missing])])
-dnl    ;;
-dnl   *)
-dnl     AC_MSG_ERROR([unsupported host os: $host_os])
-dnl     ;;
-dnl esac
+case $host_os in
+  *darwin*)
+    AC_MSG_NOTICE([doing darwin stuff])
+    ;;
+  *linux*)
+    AC_MSG_NOTICE([doing linux stuff])
+    ;;
+ *mingw*)
+   AC_MSG_NOTICE([doing mingw stuff])
+   AC_CHECK_LIB([comdlg32], [main],[],[AC_MSG_ERROR([libcomdlg32 missing])])
+   AC_CHECK_LIB([gdi32],    [main],[],[AC_MSG_ERROR([libgdi32 missing])])
+   ;;
+  *)
+    AC_MSG_ERROR([unsupported host os: $host_os])
+    ;;
+esac
 
 
-# snif fltk-config stuff
+# sniff fltk-config stuff
 
-FLTK_CONFIG_INCLUDEDIR=$(${FLTK_CONFIG} --use-images --includedir)
-FLTK_CONFIG_CXXFLAGS=$(${FLTK_CONFIG} --use-images --cxxflags)
-FLTK_CONFIG_LDFLAGS=$(${FLTK_CONFIG} --use-images --ldflags)
+FLTK_CONFIG_INCLUDEDIR=$(${FLTK_CONFIG} --use-images --use-gl --includedir)
+FLTK_CONFIG_CXXFLAGS=$(${FLTK_CONFIG} --use-images --use-gl --cxxflags)
+FLTK_CONFIG_LDFLAGS=$(${FLTK_CONFIG} --use-images --use-gl --ldflags)
 
 # spit fltk-config stuff
 

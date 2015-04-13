@@ -2,7 +2,7 @@
 
 # rendera/install-dependencies.sh
 #
-# install packages on which rendera depends
+# install packages required by the rendera build
 
 
 function _install_macports()
@@ -37,11 +37,10 @@ case "${_system}" in
                  git                 \
                  libX11-dev          \
                  libfltk1.3-dev      \
+                 libfltk-images1.3   \
                  libfontconfig1-dev  \
                  libglu1-mesa-dev    \
                  libice-dev          \
-                 libjpeg-dev         \
-                 libpng-dev          \
                  libtool             \
                  libx11-dev          \
                  libxcursor-dev      \
@@ -50,7 +49,6 @@ case "${_system}" in
                  libxi-dev           \
                  libxinerama-dev     \
                  libxrender-dev      \
-                 libz-dev            \
                  mesa-common-dev     \
                  mingw32             \
                  mingw32-binutils    \
