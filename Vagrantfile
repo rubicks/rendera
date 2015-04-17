@@ -74,8 +74,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, :inline => "hostname #{hostname}"
   config.vm.provision :shell, :inline => "apt-get update --fix-missing"
   config.vm.provision :shell, :inline => "apt-get dist-upgrade -yy"
-  config.vm.provision :shell, :path   => "install-dependencies.sh"
-  config.vm.provision :shell, :path   => "install-fltk.sh"
+  config.vm.provision :shell, :inline => "/bin/bash -c -- '/vagrant/install-dependencies.sh'"
+  config.vm.provision :shell, :inline => "/bin/bash -c -- '/vagrant/install-fltk.sh'"
+  config.vm.provision :shell, :inline => "/bin/bash -c -- 'HOST=i586-mingw32msvc /vagrant/install-fltk.sh'"
   # config.vm.provision :file, :source => ".", :destination => "/tmp"
 
   config.ssh.pty = true
