@@ -20,6 +20,7 @@ echo -n                                                             && \
     autoreconf -ivf ${PROJECT_DIR} && \
     ${PROJECT_DIR}/configure \
                   --host=${HOST} \
+                  --includedir=/usr/${HOST}/include \
                   --prefix=${RENDERA_PREFIX_DIR} && \
     make           && \
     make check     && \
